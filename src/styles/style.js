@@ -66,7 +66,8 @@ const style = StyleSheet.create({
     flexDirection: 'row',
   },
   dataName: {
-    color: COLORS.grey,
+    // color: COLORS.grey,
+    color: '#1a1a1c',
     fontSize: 10,
     fontWeight: 'bold',
   },

@@ -61,7 +61,6 @@ const DetailsPage = () => {
       .then(res => res.json())
       .then(comment => {
         setComments(prevComments => [...prevComments, comment]);
-        // console.log(comments);
       })
       .catch(err => console.error(err));
   };
