@@ -46,10 +46,9 @@ const DetailsPage = () => {
   };
 
   const fetchComment = commentId => {
-    // Check if the comment already exists in the comments state
     const existingComment = comments.find(comment => comment.id === commentId);
     if (existingComment) {
-      return; // If the comment exists, exit the function
+      return;
     }
 
     // Fetch the comment
