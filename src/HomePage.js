@@ -28,7 +28,8 @@ const HomePage = () => {
       .then(res => res.json())
       .then(rjson => {
         setData(rjson);
-        fetchNewStory(startIndex, batchSize);
+        const sortedData = rjson.sort((a, b) => b - a);
+        setData(sortedData);
       })
       .catch(err => console.log(err));
   }, []);

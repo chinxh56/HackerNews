@@ -90,9 +90,16 @@ const style = StyleSheet.create({
     textAlign: 'left',
     fontWeight: 'bold',
     color: COLORS.orange,
+    marginBottom: getHeight(3),
   },
   commentContainer: {
     paddingBottom: '5%',
+  },
+  nocommentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: '5%',
+    height: getHeight(30),
   },
   dataCommentName: {
     color: COLORS.black,

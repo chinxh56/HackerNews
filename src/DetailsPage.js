@@ -19,26 +19,30 @@ const DetailsPage = () => {
 
   const getAllComment = item => {
     setLoading(true);
-    Promise.all(
-      item.kids.map(id =>
-        fetch(
-          `https://hacker-news.firebaseio.com/v0/item/${id}.json?printpretty`,
-          {
-            method: 'GET',
-            headers: new Headers({
-              'Content-Type': 'application/JSON',
-            }),
-          },
-        ).then(res => res.json()),
-      ),
-    )
-      .then(comment => {
-        setComments(comment);
-      })
-      .catch(err => console.log(err))
-      .finally(() => {
-        setLoading(false);
-      });
+    if (item.kids && item.kids.length > 0) {
+      Promise.all(
+        item.kids.map(id =>
+          fetch(
+            `https://hacker-news.firebaseio.com/v0/item/${id}.json?printpretty`,
+            {
+              method: 'GET',
+              headers: new Headers({
+                'Content-Type': 'application/JSON',
+              }),
+            },
+          ).then(res => res.json()),
+        ),
+      )
+        .then(comment => {
+          setComments(comment);
+        })
+        .catch(err => console.log(err))
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
   };
 
   const fetchComment = commentId => {
@@ -98,6 +102,14 @@ const DetailsPage = () => {
     return renderNestedComments(item);
   };
 
+  const renderEmpty = () => {
+    return (
+      <View style={style.nocommentContainer}>
+        <Text style={style.dataName}>No Comment Yet</Text>
+      </View>
+    );
+  };
+
   const getDate = time => {
     // Extract date components
     const date = new Date(time * 1000); // Assuming item.timestamp contains the Unix timestamp
@@ -142,6 +154,7 @@ const DetailsPage = () => {
           data={comments}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
+          ListEmptyComponent={renderEmpty}
         />
       </View>
     </View>
